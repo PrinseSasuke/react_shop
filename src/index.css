@@ -1,13 +1,332 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+html {
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #e7f6ff;
 }
+
+.App {
+  background-color: #fff;
+  max-width: 1080px;
+  margin: 0 auto;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+  pointer-events: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.text {
+  font-size: 50px;
+}
+
+.h2 {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.btn {
+  background-color: #9dd458;
+  border-radius: 18px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  background-color: #fff;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section-outter {
+  padding: 0 20px;
+}
+
+.drawer {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 325px;
+  right: 0;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 0 32px 0 32px;
+}
+.drawer .h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  margin-left: 32px;
+  margin-bottom: 32px;
+}
+.drawer .h2 img {
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.cartCards {
+  display: flex;
+  flex: 0.99;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.cartCardsItem {
+  display: flex;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  padding: 20px;
+}
+.cartCardsItem + .cartCardsItem {
+  margin-top: 20px;
+}
+.cartCardsItem .itemImg {
+  margin-right: 20px;
+}
+.cartCardsItem .itemWrapper {
+  max-width: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-right: 12px;
+}
+.cartCardsItem .itemName {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+.cartCardsItem .price {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+.cartCardsItem .itemDeleteButton {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  padding-top: 40px;
+}
+
+.orderInfo div {
+  position: relative;
+  top: -3px;
+  display: flex;
+  flex: 1;
+  height: 1px;
+  border-bottom: 1px dashed #dfdfdf;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.orderInfo li {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+.orderInfo li:last-child {
+  margin-bottom: 0px;
+}
+.orderInfo li span {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+.orderInfo li b {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.orderCompleteButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 20px 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+  cursor: pointer;
+}
+.orderCompleteButton svg {
+  position: absolute;
+  left: 288px;
+}
+
+.cartEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
+}
+.cartEmpty .title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.cartEmpty .text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  opacity: 40%;
+  max-width: 284px;
+  margin-bottom: 40px;
+  line-height: 24px;
+  text-align: center;
+}
+.cartEmpty img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.toBackBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px 20px 64px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.toBackBtn svg {
+  position: absolute;
+  left: 32px;
+}
+
+.section-header {
+  padding-top: 44px;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 40px;
+}
+.section-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+.headerLeft img {
+  margin-right: 16px;
+}
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.headerTitleName {
+  font-weight: 700;
+  font-size: 20px;
+}
+.headerTitleText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.headerRightList {
+  display: flex;
+}
+.headerItem {
+  cursor: pointer;
+}
+.headerItem a {
+  display: flex;
+  align-items: center;
+}
+.headerItem + .headerItem {
+  margin-left: 32px;
+}
+.headerItem svg {
+  margin-right: 4px;
+}
+.headerItemText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+
+.catalogTopWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.catalogTopWrapper .topWrapper {
+  position: relative;
+}
+.catalogTopWrapper .topWrapper .deleteSeacrh {
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.h1 {
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.catalogSearch {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px;
+  border: 2px solid #f3f3f3;
+  padding: 12px 64px 16px 48px;
+  background: white url(img/loop.svg) left no-repeat;
+  background-position: 20px, 16px;
+}
+
+input {
+  all: unset;
+}
+
+.catalogFlex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}/*# sourceMappingURL=index.css.map */

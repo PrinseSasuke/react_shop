@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+.catalogItem {
+  position: relative;
+  width: 212px;
+  border: 1px solid #F3F3F3;
+  border-radius: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 16px;
+  padding: 20px 0 36px 0;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.catalogItem:hover {
+  box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+  transform: translateY(-5px);
+}
+.catalogItemName {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  color: #000000;
+  font-size: 14px;
+  max-width: 152px;
+  margin-bottom: 16px;
+}
+.catalogItemBottomWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 152px;
+}
+.catalogItemPriceWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.catalogItemPriceWrapper b {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #BDBDBD;
+}
+.catalogItemPrice {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
+}
+.catalogItemAddButton {
+  border: 1px solid #F2F2F2;
+  transition: 0.2s;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+.catalogItemAddButton:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.catalogItemFavoriteButton {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #F8F8F8;
+  border-radius: 7px;
+}/*# sourceMappingURL=Card.module.css.map */
