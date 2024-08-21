@@ -10,15 +10,18 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
   const onAddToCart = (obj, isAdded) => {
     if (isAdded) {
-      onRemoveItem(obj.id);
+      let get_id = cartItems.find((item) => item.type == obj.id);
+      console.log(get_id);
+      console.log(get_id.id);
+      onRemoveItem(get_id.id);
     } else {
       setCartItems((prev) => [...prev, obj]);
       axios.post("https://65c60506e5b94dfca2e0c736.mockapi.io/cart", obj);
     }
   };
   const onRemoveItem = (id) => {
-    //axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
-    console.log(id);
+    axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
+
     setCartItems((prev) => prev.filter((item) => item.id != id));
   };
   const onChangeSearchInput = (event) => {
@@ -90,7 +93,7 @@ function App() {
                 })
                 .map((obj) => (
                   <Card
-                    key={obj.id}
+                    type={obj.type}
                     name={obj.name}
                     price={obj.price}
                     imageUrl={obj.imageUrl}
