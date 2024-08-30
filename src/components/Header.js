@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Header(props) {
   return (
     <header className="section-outter section-header">
@@ -48,7 +49,7 @@ function Header(props) {
               </a>
             </li>
             <li className="headerItem">
-              <a href="#">
+              <Link to="/test">
                 <svg
                   width="18"
                   height="17"
@@ -61,8 +62,9 @@ function Header(props) {
                     fill="#9B9B9B"
                   />
                 </svg>
+
                 <div className="headerItemText">Закладки</div>
-              </a>
+              </Link>
             </li>
             <li className="headerItem">
               <a href="#">

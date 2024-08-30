@@ -3,10 +3,12 @@ import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import React from "react";
 import axios from "axios";
+import { Route } from "react-router-dom";
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const onAddToCart = (obj, isAdded) => {
     if (isAdded) {
@@ -18,6 +20,10 @@ function App() {
       setCartItems((prev) => [...prev, obj]);
       axios.post("https://65c60506e5b94dfca2e0c736.mockapi.io/cart", obj);
     }
+  };
+  const onAddToFavorite = (obj) => {
+    setFavorites((prev) => [...prev, obj]);
+    axios.post("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites", obj);
   };
   const onRemoveItem = (id) => {
     axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
@@ -59,6 +65,11 @@ function App() {
       )}
 
       <Header onClickCart={() => setCartOpened(true)} />
+
+      <Route path="/test">
+        <Header />
+      </Route>
+
       <main>
         <section className="section-outer section-catalog">
           <div className="container">
@@ -101,6 +112,7 @@ function App() {
                     onPlus={(obj, isAdded) => {
                       onAddToCart(obj, isAdded);
                     }}
+                    onFavorite={(obj) => onAddToFavorite(obj)}
                   />
                 ))}
             </ul>
