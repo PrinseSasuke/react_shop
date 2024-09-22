@@ -1,10 +1,12 @@
 function Drawer({ onClose, items = [], onRemove }) {
+  console.log("Items", items.length);
   return (
     <div className="drawer">
       <h2 className="h2">
         Корзина{" "}
         <img src="/img/delete.svg" alt="delete card" onClick={onClose} />
       </h2>
+
       {items.length > 0 ? (
         <>
           <ul className="cartCards">

@@ -3,13 +3,25 @@ import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import React from "react";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
+  React.useEffect(() => {
+    axios
+      .get("https://65c60506e5b94dfca2e0c736.mockapi.io/cart")
+      .then((res) => {
+        setCartItems(res.data);
+      });
+    axios
+      .get("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites")
+      .then((res) => {
+        setFavorites(res.data);
+      });
+  }, []);
   const onAddToCart = (obj, isAdded) => {
     if (isAdded) {
       let get_id = cartItems.find((item) => item.type == obj.id);
@@ -37,19 +49,6 @@ function App() {
     setSearchValue("");
   };
 
-  React.useEffect(() => {
-    axios
-      .get("https://65c60506e5b94dfca2e0c736.mockapi.io/items")
-      .then((res) => {
-        setItems(res.data);
-      });
-    axios
-      .get("https://65c60506e5b94dfca2e0c736.mockapi.io/cart")
-      .then((res) => {
-        setCartItems(res.data);
-      });
-  }, []);
-
   return (
     <div className="App">
       {cartOpened && (
@@ -66,58 +65,21 @@ function App() {
 
       <Header onClickCart={() => setCartOpened(true)} />
 
-      <Route path="/test">
-        <Header />
-      </Route>
-
       <main>
-        <section className="section-outer section-catalog">
-          <div className="container">
-            <div className="catalogTopWrapper">
-              <h1 className="h1">
-                {searchValue ? `Поиск по ${searchValue}` : "Все кроссовки"}
-              </h1>
-              <div className="topWrapper">
-                <input
-                  placeholder="Поиск..."
-                  id="search"
-                  className="catalogSearch"
-                  onChange={onChangeSearchInput}
-                  value={searchValue}
-                />
-                {searchValue && (
-                  <img
-                    src="/img/delete.svg"
-                    alt=""
-                    className="deleteSeacrh"
-                    onClick={clearSeacthInput}
-                  />
-                )}
-              </div>
-            </div>
-            <ul className="catalogFlex">
-              {items
-                .filter((item) => {
-                  return item.name
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase());
-                })
-                .map((obj) => (
-                  <Card
-                    type={obj.type}
-                    name={obj.name}
-                    price={obj.price}
-                    imageUrl={obj.imageUrl}
-                    id={obj.id}
-                    onPlus={(obj, isAdded) => {
-                      onAddToCart(obj, isAdded);
-                    }}
-                    onFavorite={(obj) => onAddToFavorite(obj)}
-                  />
-                ))}
-            </ul>
-          </div>
-        </section>
+        <Outlet
+          context={{
+            cartOpened,
+            setCartOpened,
+            items,
+            setItems,
+            cartItems,
+            setCartItems,
+            favorites,
+            setFavorites,
+            searchValue,
+            setSearchValue,
+          }}
+        />
       </main>
     </div>
   );

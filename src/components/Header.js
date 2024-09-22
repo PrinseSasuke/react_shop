@@ -3,7 +3,7 @@ function Header(props) {
   return (
     <header className="section-outter section-header">
       <div className="container">
-        <a className="headerLeft" href="#">
+        <Link className="headerLeft" to="/">
           <div href="#">
             <img src="/img/logo.svg" />
           </div>
@@ -11,7 +11,7 @@ function Header(props) {
             <div className="headerTitleName">REACT SNEAKERS</div>
             <div className="headerTitleText">Магазин лучших кроссовок</div>
           </div>
-        </a>
+        </Link>
         <div className="headerRight">
           <ul className="headerRightList">
             <li className="headerItem" onClick={props.onClickCart}>
@@ -49,7 +49,7 @@ function Header(props) {
               </a>
             </li>
             <li className="headerItem">
-              <Link to="/test">
+              <Link to="/favorites">
                 <svg
                   width="18"
                   height="17"

@@ -4,13 +4,29 @@ import "./index.css";
 import "./reset.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/favorites",
+        element: <Favorites />,
+      },
+    ],
+  },
+]);
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

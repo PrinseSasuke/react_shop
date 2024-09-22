@@ -265,7 +265,7 @@ button {
 .section-header {
   padding-top: $base * 11;
   @include inter();
-  margin-bottom: $base * 10;
+  padding-bottom: $base * 10;
   .container {
     display: flex;
     justify-content: space-between;
