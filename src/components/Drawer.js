@@ -1,5 +1,4 @@
 function Drawer({ onClose, items = [], onRemove }) {
-  console.log("Items", items.length);
   return (
     <div className="drawer">
       <h2 className="h2">

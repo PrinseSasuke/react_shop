@@ -1,4 +1,3 @@
-import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import React from "react";
@@ -10,6 +9,26 @@ function App() {
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
+  const onAddToFavorite = async (obj) => {
+    try {
+      if (favorites.find((favObj) => favObj.id === obj.id)) {
+        await axios.delete(
+          `https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites/${obj.id}`
+        );
+
+        setFavorites((prev) => prev.filter((favObj) => favObj.id !== obj.id));
+      } else {
+        const { data } = await axios.post(
+          "https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites",
+          obj
+        );
+        console.log("data: ", data);
+        setFavorites((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      console.error("Failed to update favorites", error);
+    }
+  };
   React.useEffect(() => {
     axios
       .get("https://65c60506e5b94dfca2e0c736.mockapi.io/cart")
@@ -22,33 +41,11 @@ function App() {
         setFavorites(res.data);
       });
   }, []);
-  const onAddToCart = (obj, isAdded) => {
-    if (isAdded) {
-      let get_id = cartItems.find((item) => item.type == obj.id);
-      console.log(get_id);
-      console.log(get_id.id);
-      onRemoveItem(get_id.id);
-    } else {
-      setCartItems((prev) => [...prev, obj]);
-      axios.post("https://65c60506e5b94dfca2e0c736.mockapi.io/cart", obj);
-    }
-  };
-  const onAddToFavorite = (obj) => {
-    setFavorites((prev) => [...prev, obj]);
-    axios.post("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites", obj);
-  };
   const onRemoveItem = (id) => {
     axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
 
     setCartItems((prev) => prev.filter((item) => item.id != id));
   };
-  const onChangeSearchInput = (event) => {
-    setSearchValue(event.target.value);
-  };
-  const clearSeacthInput = (event) => {
-    setSearchValue("");
-  };
-
   return (
     <div className="App">
       {cartOpened && (
@@ -78,6 +75,7 @@ function App() {
             setFavorites,
             searchValue,
             setSearchValue,
+            onAddToFavorite,
           }}
         />
       </main>

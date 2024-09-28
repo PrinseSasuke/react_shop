@@ -4,35 +4,33 @@ import axios from "axios";
 import { useOutletContext } from "react-router-dom";
 function Home() {
   const {
-    cartOpened,
-    setCartOpened,
     items,
     setItems,
     cartItems,
     setCartItems,
-    favorites,
     setFavorites,
     searchValue,
     setSearchValue,
+    favorites,
+    onAddToFavorite,
   } = useOutletContext();
-  const onAddToCart = (obj, isAdded) => {
+  const onAddToCart = async (obj, isAdded) => {
     if (isAdded) {
-      let get_id = cartItems.find((item) => item.type == obj.id);
-      console.log(get_id);
-      console.log(get_id.id);
-      onRemoveItem(get_id.id);
+      let get_id = cartItems.find((item) => item.type == obj.type);
+      await onRemoveItem(get_id.id);
     } else {
-      setCartItems((prev) => [...prev, obj]);
-      axios.post("https://65c60506e5b94dfca2e0c736.mockapi.io/cart", obj);
+      try {
+        const { data } = await axios.post(
+          "https://65c60506e5b94dfca2e0c736.mockapi.io/cart",
+          obj
+        );
+        setCartItems((prev) => [...prev, data]);
+      } catch (error) {}
     }
   };
-  const onAddToFavorite = (obj) => {
-    setFavorites((prev) => [...prev, obj]);
-    axios.post("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites", obj);
-  };
+
   const onRemoveItem = (id) => {
     axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
-
     setCartItems((prev) => prev.filter((item) => item.id != id));
   };
   const onChangeSearchInput = (event) => {
@@ -93,15 +91,15 @@ function Home() {
             })
             .map((obj) => (
               <Card
-                type={obj.type}
-                name={obj.name}
-                price={obj.price}
-                imageUrl={obj.imageUrl}
-                id={obj.id}
+                key={obj.id}
                 onPlus={(obj, isAdded) => {
                   onAddToCart(obj, isAdded);
                 }}
-                onFavorite={(obj) => onAddToFavorite(obj)}
+                onFavorite={(obj) => onAddToFavorite(obj, obj.id)}
+                {...obj}
+                added={cartItems.some(
+                  (item) => Number(item.type) === Number(obj.type)
+                )}
               />
             ))}
         </ul>

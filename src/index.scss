@@ -302,6 +302,10 @@ button {
   }
   &Item {
     cursor: pointer;
+    .cart {
+      display: flex;
+      align-items: center;
+    }
     a {
       display: flex;
       align-items: center;

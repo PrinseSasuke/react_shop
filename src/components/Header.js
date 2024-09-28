@@ -15,7 +15,7 @@ function Header(props) {
         <div className="headerRight">
           <ul className="headerRightList">
             <li className="headerItem" onClick={props.onClickCart}>
-              <a href="#">
+              <div className="cart">
                 <svg
                   width="20"
                   height="20"
@@ -46,7 +46,7 @@ function Header(props) {
                   />
                 </svg>
                 <div className="headerItemText">1205 руб.</div>
-              </a>
+              </div>
             </li>
             <li className="headerItem">
               <Link to="/favorites">

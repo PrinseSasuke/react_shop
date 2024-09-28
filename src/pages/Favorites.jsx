@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useOutletContext } from "react-router-dom";
 function Favorites() {
-  const favorites = useOutletContext();
+  const { favorites, setFavorites, onAddToFavorite } = useOutletContext();
 
   return (
     <section className="section-outer section-catalog">
@@ -13,18 +13,17 @@ function Favorites() {
         </div>
 
         <ul className="catalogFlex">
-          {/* {favorites.map((obj) => (
+          {favorites.map((obj) => (
             <Card
-              type={obj.type}
-              name={obj.name}
-              price={obj.price}
-              imageUrl={obj.imageUrl}
-              id={obj.id}
+              {...obj}
+              favorited={true}
+              onFavorite={() => onAddToFavorite(obj)}
             />
-          ))} */}
+          ))}
         </ul>
       </div>
     </section>
   );
 }
+
 export default Favorites;

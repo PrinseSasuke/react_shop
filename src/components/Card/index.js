@@ -1,17 +1,26 @@
 import styles from "./Card.module.scss";
 import React from "react";
 
-function Card({ name, price, imageUrl, onPlus, id, type, onFavorite }) {
-  const [isAdded, setIsAdded] = React.useState(false);
-  const [isFavorite, setIsFavorite] = React.useState(false);
+function Card({
+  name,
+  price,
+  imageUrl,
+  onPlus,
+  id,
+  type,
+  onFavorite,
+  favorited = false,
+  added,
+}) {
+  const [isFavorite, setIsFavorite] = React.useState(favorited);
   const onClickPlus = () => {
-    onPlus({ name, price, imageUrl, id, type }, isAdded);
-    setIsAdded(!isAdded);
+    onPlus({ name, price, imageUrl, id, type }, added);
   };
   const onClickFavorite = () => {
     setIsFavorite(!isFavorite);
     onFavorite({ name, price, imageUrl, id, type });
   };
+
   return (
     <li className={styles.catalogItem}>
       <button
@@ -65,9 +74,10 @@ function Card({ name, price, imageUrl, onPlus, id, type, onFavorite }) {
         <button
           className={styles.catalogItemAddButton}
           onClick={onClickPlus}
-          style={{ backgroundColor: isAdded ? "#89F09C" : "" }}
+          style={{ backgroundColor: added ? "#89F09C" : "" }}
         >
-          <img src={isAdded ? "/img/added.svg" : "/img/plus.svg"} alt="" />
+          {console.log(added)}
+          <img src={added ? "/img/added.svg" : "/img/plus.svg"} alt="" />
         </button>
       </div>
     </li>

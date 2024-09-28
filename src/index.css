@@ -270,6 +270,10 @@ button {
 .headerItem {
   cursor: pointer;
 }
+.headerItem .cart {
+  display: flex;
+  align-items: center;
+}
 .headerItem a {
   display: flex;
   align-items: center;
