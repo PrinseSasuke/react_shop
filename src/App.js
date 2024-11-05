@@ -1,14 +1,16 @@
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-import React from "react";
+import React, { createContext } from "react";
 import axios from "axios";
 import { Outlet } from "react-router-dom";
+export const AppContext = createContext({});
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(true);
   const onAddToFavorite = async (obj) => {
     try {
       if (favorites.find((favObj) => favObj.id === obj.id)) {
@@ -30,56 +32,80 @@ function App() {
     }
   };
   React.useEffect(() => {
-    axios
-      .get("https://65c60506e5b94dfca2e0c736.mockapi.io/cart")
-      .then((res) => {
-        setCartItems(res.data);
-      });
-    axios
-      .get("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites")
-      .then((res) => {
-        setFavorites(res.data);
+    setIsLoading(true);
+    Promise.all([
+      axios.get("https://65c60506e5b94dfca2e0c736.mockapi.io/cart"),
+      axios.get("https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/favorites"),
+    ])
+      .then(([cartRes, favRes]) => {
+        setCartItems(cartRes.data);
+        setFavorites(favRes.data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при загрузке данных", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Ставим загрузку в false только после завершения всех запросов
       });
   }, []);
+
   const onRemoveItem = (id) => {
     axios.delete(`https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${id}`);
 
     setCartItems((prev) => prev.filter((item) => item.id != id));
   };
   return (
-    <div className="App">
-      {cartOpened && (
-        <div className="overlay">
-          <Drawer
-            items={cartItems}
-            onClose={() => {
-              setCartOpened(false);
+    <AppContext.Provider
+      value={{
+        cartOpened,
+        setCartOpened,
+        items,
+        setItems,
+        cartItems,
+        setCartItems,
+        favorites,
+        setFavorites,
+        searchValue,
+        setSearchValue,
+        onAddToFavorite,
+        isLoading,
+      }}
+    >
+      <div className="App">
+        {cartOpened && (
+          <div className="overlay">
+            <Drawer
+              items={cartItems}
+              onClose={() => {
+                setCartOpened(false);
+              }}
+              onRemove={onRemoveItem}
+            />
+          </div>
+        )}
+
+        <Header onClickCart={() => setCartOpened(true)} />
+
+        <main>
+          <Outlet
+            context={{
+              cartOpened,
+              setCartOpened,
+              items,
+              setItems,
+              cartItems,
+              setCartItems,
+              favorites,
+              setFavorites,
+              searchValue,
+              setSearchValue,
+              onAddToFavorite,
+              isLoading,
             }}
-            onRemove={onRemoveItem}
           />
-        </div>
-      )}
-
-      <Header onClickCart={() => setCartOpened(true)} />
-
-      <main>
-        <Outlet
-          context={{
-            cartOpened,
-            setCartOpened,
-            items,
-            setItems,
-            cartItems,
-            setCartItems,
-            favorites,
-            setFavorites,
-            searchValue,
-            setSearchValue,
-            onAddToFavorite,
-          }}
-        />
-      </main>
-    </div>
+        </main>
+      </div>
+    </AppContext.Provider>
   );
 }
 

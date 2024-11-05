@@ -13,7 +13,29 @@ function Home() {
     setSearchValue,
     favorites,
     onAddToFavorite,
+    isLoading,
   } = useOutletContext();
+  const renderItems = () => {
+    const filteredItems = items.filter((item) => {
+      return item.name.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    return (isLoading ? [...Array(10)] : filteredItems).map((obj, index) => (
+      <Card
+        loading={isLoading}
+        key={index}
+        onPlus={(obj, isAdded) => {
+          onAddToCart(obj, isAdded);
+        }}
+        onFavorite={(obj) => onAddToFavorite(obj, obj.id)}
+        {...obj}
+        added={
+          obj
+            ? cartItems.some((item) => Number(item.type) === Number(obj.type))
+            : null
+        }
+      />
+    ));
+  };
   const onAddToCart = async (obj, isAdded) => {
     if (isAdded) {
       let get_id = cartItems.find((item) => item.type == obj.type);
@@ -82,27 +104,7 @@ function Home() {
             )}
           </div>
         </div>
-        <ul className="catalogFlex">
-          {items
-            .filter((item) => {
-              return item.name
-                .toLowerCase()
-                .includes(searchValue.toLowerCase());
-            })
-            .map((obj) => (
-              <Card
-                key={obj.id}
-                onPlus={(obj, isAdded) => {
-                  onAddToCart(obj, isAdded);
-                }}
-                onFavorite={(obj) => onAddToFavorite(obj, obj.id)}
-                {...obj}
-                added={cartItems.some(
-                  (item) => Number(item.type) === Number(obj.type)
-                )}
-              />
-            ))}
-        </ul>
+        <ul className="catalogFlex">{renderItems()}</ul>
       </div>
     </section>
   );

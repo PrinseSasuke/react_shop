@@ -1,4 +1,35 @@
+import Info from "../components/info";
+import React, { useContext } from "react";
+import { AppContext } from "../App";
+import axios from "axios";
 function Drawer({ onClose, items = [], onRemove }) {
+  const { setCartItems, cartItems } = useContext(AppContext);
+  const [isOrderComplete, setisOrderComplete] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/orders",
+        { items: cartItems }
+      );
+      setOrderId(data.id);
+      setisOrderComplete(true);
+      await Promise.all(
+        cartItems.map((item) =>
+          axios.delete(
+            `https://65c60506e5b94dfca2e0c736.mockapi.io/cart/${item.id}`
+          )
+        )
+      );
+      setCartItems([]);
+    } catch (error) {
+      alert("Не удалось создать заказ");
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   return (
     <div className="drawer">
       <h2 className="h2">
@@ -39,7 +70,11 @@ function Drawer({ onClose, items = [], onRemove }) {
               <b>1074 руб. </b>
             </li>
             <li>
-              <button className="btn orderCompleteButton">
+              <button
+                disabled={isLoading}
+                className="btn orderCompleteButton"
+                onClick={onClickOrder}
+              >
                 Оформить заказ{" "}
                 <svg
                   width="16"
@@ -68,38 +103,17 @@ function Drawer({ onClose, items = [], onRemove }) {
           </ul>
         </>
       ) : (
-        <div className="cartEmpty">
-          <img src="/img/empty_cart.png" alt="empty cart" />
-          <p className="title">Корзина пустая</p>
-          <p className="text">
-            Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-          </p>
-          <button className="btn toBackBtn" onClick={onClose}>
-            <svg
-              width="16"
-              height="14"
-              viewBox="0 0 16 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.7144 7L1.00007 7"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M7 13L1 7L7 1"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Вернуться назад
-          </button>
-        </div>
+        <Info
+          title={isOrderComplete ? "Заказ оформлен!" : "Корзина пустая"}
+          description={
+            isOrderComplete
+              ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+              : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+          }
+          image_url={
+            isOrderComplete ? "/img/order_complete.png" : "/img/empty_cart.png"
+          }
+        />
       )}
     </div>
   );
