@@ -385,3 +385,35 @@ input {
     opacity: 1;
   }
 }
+
+// === ORDERS === //
+.orders {
+  .h1 {
+    margin-bottom: $base * 7;
+  }
+  &List {
+    .catalogItem {
+      margin-bottom: 0;
+    }
+    .catalogFlex {
+      margin-top: $base * 4;
+      justify-content: flex-start;
+      gap: $base * 10;
+      border: 1px solid #f3f3f3;
+      border-radius: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+    }
+  }
+
+  &Item {
+    margin-bottom: $base * 4;
+    &Name {
+      @include inter();
+      font-size: $fs-4;
+      font-weight: $fw-bold;
+      color: $color--dark;
+    }
+  }
+}
+
+// === /ORDERS === //

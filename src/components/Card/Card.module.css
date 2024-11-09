@@ -2,7 +2,7 @@
 .catalogItem {
   position: relative;
   width: 212px;
-  border: 1px solid #F3F3F3;
+  border: 1px solid #f3f3f3;
   border-radius: 40px;
   display: flex;
   flex-wrap: wrap;
@@ -38,7 +38,7 @@
   font-weight: 500;
   font-size: 11px;
   text-transform: uppercase;
-  color: #BDBDBD;
+  color: #bdbdbd;
 }
 .catalogItemPrice {
   font-family: "Inter", sans-serif;
@@ -47,7 +47,7 @@
   color: #000000;
 }
 .catalogItemAddButton {
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
   transition: 0.2s;
   border-radius: 8px;
   padding: 10px;
@@ -68,6 +68,10 @@
   cursor: pointer;
   width: 32px;
   height: 32px;
-  border: 1px solid #F8F8F8;
+  border: 1px solid #f8f8f8;
   border-radius: 7px;
+}
+
+.noMarginBottom {
+  margin-bottom: 0 !important;
 }/*# sourceMappingURL=Card.module.css.map */

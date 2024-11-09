@@ -1,12 +1,12 @@
 import Info from "../components/info";
 import React, { useContext } from "react";
-import { AppContext } from "../App";
+import { useCart } from "../hooks/useCart";
 import axios from "axios";
 function Drawer({ onClose, items = [], onRemove }) {
-  const { setCartItems, cartItems } = useContext(AppContext);
   const [isOrderComplete, setisOrderComplete] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { cartItems, setCartItems, totlaPrice } = useCart();
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
@@ -47,7 +47,7 @@ function Drawer({ onClose, items = [], onRemove }) {
                 </div>
                 <div className="itemWrapper">
                   <div className="itemName">{obj.name}</div>
-                  <span className="price">{obj.price} руб.</span>
+                  <span className="price">{obj.price}.</span>
                 </div>
                 <button
                   className="itemDeleteButton"
@@ -62,12 +62,12 @@ function Drawer({ onClose, items = [], onRemove }) {
             <li>
               <span>Итого: </span>
               <div></div>
-              <b>21 498 руб.</b>
+              <b>{totlaPrice()} руб.</b>
             </li>
             <li>
               <span>Налог 5%: </span>
               <div></div>
-              <b>1074 руб. </b>
+              <b>{totlaPrice() * 0.05} руб.</b>
             </li>
             <li>
               <button

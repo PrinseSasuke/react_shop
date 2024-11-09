@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 html {
   font-size: 16px;
@@ -179,6 +180,11 @@ button {
   width: 100%;
   cursor: pointer;
 }
+.orderCompleteButton:disabled {
+  animation: button-loading 0.6s ease-in-out infinite;
+  background-color: #bebebe;
+  cursor: default;
+}
 .orderCompleteButton svg {
   position: absolute;
   left: 288px;
@@ -332,4 +338,39 @@ input {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.orders .h1 {
+  margin-bottom: 28px;
+}
+.ordersList .catalogItem {
+  margin-bottom: 0;
+}
+.ordersList .catalogFlex {
+  margin-top: 16px;
+  justify-content: flex-start;
+  gap: 40px;
+  border: 1px solid #f3f3f3;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+}
+.ordersItem {
+  margin-bottom: 16px;
+}
+.ordersItemName {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
 }/*# sourceMappingURL=index.css.map */
