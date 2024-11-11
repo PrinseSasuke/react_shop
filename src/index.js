@@ -11,7 +11,7 @@ import Orders from "./pages/Orders";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/react_shop",
     element: <App />,
     children: [
       {
@@ -19,11 +19,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/favorites",
+        path: "/react_shop/favorites",
         element: <Favorites />,
       },
       {
-        path: "/orders",
+        path: "/react_shop/orders",
         element: <Orders />,
       },
     ],
