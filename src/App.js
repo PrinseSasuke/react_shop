@@ -72,17 +72,14 @@ function App() {
       }}
     >
       <div className="App">
-        {cartOpened && (
-          <div className="overlay">
-            <Drawer
-              items={cartItems}
-              onClose={() => {
-                setCartOpened(false);
-              }}
-              onRemove={onRemoveItem}
-            />
-          </div>
-        )}
+        <Drawer
+          items={cartItems}
+          onClose={() => {
+            setCartOpened(false);
+          }}
+          onRemove={onRemoveItem}
+          opened={cartOpened}
+        />
 
         <Header onClickCart={() => setCartOpened(true)} />
 

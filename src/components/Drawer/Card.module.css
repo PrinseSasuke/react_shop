@@ -1,0 +1,45 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlayVisible {
+  visibility: visible;
+  opacity: 1;
+}
+.overlayVisible .drawer {
+  transform: translateX(0);
+}
+
+.drawer {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 325px;
+  right: 0;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 0 32px 0 32px;
+}
+.drawer .h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  margin-left: 32px;
+  margin-bottom: 32px;
+}
+.drawer .h2 img {
+  cursor: pointer;
+}/*# sourceMappingURL=Card.module.css.map */

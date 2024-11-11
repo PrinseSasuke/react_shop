@@ -10,10 +10,11 @@ function Orders() {
         const { data } = await axios.get(
           "https://66cd8a418ca9aa6c8ccab3ef.mockapi.io/orders"
         );
-        console.log(data);
+
         setOrders(data);
       } catch (error) {
         console.log(error);
+      } finally {
       }
     };
     fetchOrders();
@@ -36,6 +37,7 @@ function Orders() {
                     key={obj.id}
                     {...obj}
                     className={`${styles.noMarginBottom}`}
+                    added={true}
                   />
                 ))}
               </ul>
