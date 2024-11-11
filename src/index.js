@@ -19,11 +19,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/react_shop/favorites",
+        path: "/favorites",
         element: <Favorites />,
       },
       {
-        path: "/react_shop/orders",
+        path: "/orders",
         element: <Orders />,
       },
     ],
