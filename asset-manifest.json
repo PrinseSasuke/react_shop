@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.13ee44e5.css",
-    "main.js": "/static/js/main.24cce93e.js",
-    "static/js/453.a2b4e476.chunk.js": "/static/js/453.a2b4e476.chunk.js",
-    "index.html": "/index.html",
-    "static/media/loop.svg": "/static/media/loop.48c52bf5d459537e27c0.svg",
-    "main.13ee44e5.css.map": "/static/css/main.13ee44e5.css.map",
-    "main.24cce93e.js.map": "/static/js/main.24cce93e.js.map",
-    "453.a2b4e476.chunk.js.map": "/static/js/453.a2b4e476.chunk.js.map"
+    "main.css": "/react_shop/static/css/main.2f1a204a.css",
+    "main.js": "/react_shop/static/js/main.4882562d.js",
+    "static/js/453.a2b4e476.chunk.js": "/react_shop/static/js/453.a2b4e476.chunk.js",
+    "index.html": "/react_shop/index.html",
+    "static/media/loop.svg": "/react_shop/static/media/loop.48c52bf5d459537e27c0.svg",
+    "main.2f1a204a.css.map": "/react_shop/static/css/main.2f1a204a.css.map",
+    "main.4882562d.js.map": "/react_shop/static/js/main.4882562d.js.map",
+    "453.a2b4e476.chunk.js.map": "/react_shop/static/js/453.a2b4e476.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.13ee44e5.css",
-    "static/js/main.24cce93e.js"
+    "static/css/main.2f1a204a.css",
+    "static/js/main.4882562d.js"
   ]
 }
