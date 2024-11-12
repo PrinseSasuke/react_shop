@@ -8,6 +8,18 @@ function Drawer({ onClose, items = [], onRemove, opened }) {
   const [orderId, setOrderId] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const { cartItems, setCartItems, totlaPrice } = useCart();
+  React.useEffect(() => {
+    if (opened) {
+      document.body.style.overflow = "hidden"; // Отключаем прокрутку при открытом Drawer
+    } else {
+      document.body.style.overflow = ""; // Возвращаем прокрутку в исходное состояние при закрытии Drawer
+    }
+
+    // Очистка эффекта при размонтировании компонента
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [opened]);
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
