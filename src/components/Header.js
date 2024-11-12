@@ -12,7 +12,7 @@ function Header(props) {
   return (
     <header className="section-outter section-header">
       <div className="container">
-        <Link className="headerLeft" to="/">
+        <Link className="headerLeft" to="/react_shop">
           <div href="#">
             <img src="img/logo.svg" />
           </div>
@@ -58,7 +58,7 @@ function Header(props) {
               </div>
             </li>
             <li className="headerItem">
-              <Link to="/favorites">
+              <Link to="react_shop/favorites">
                 <svg
                   width="18"
                   height="17"
@@ -76,7 +76,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="headerItem">
-              <Link to="/orders">
+              <Link to="/react_shop/orders">
                 <a href="#">
                   <svg
                     width="18"
