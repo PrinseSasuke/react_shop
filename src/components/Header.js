@@ -76,7 +76,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="headerItem">
-              <Link to="/orders">
+              <Link to="/react_shop/orders">
                 <a href="#">
                   <svg
                     width="18"
