@@ -12,7 +12,7 @@ function Header(props) {
   return (
     <header className="section-outter section-header">
       <div className="container">
-        <Link className="headerLeft" to="/react_shop">
+        <Link className="headerLeft" to="/react_shop/">
           <div href="#">
             <img src="img/logo.svg" />
           </div>
