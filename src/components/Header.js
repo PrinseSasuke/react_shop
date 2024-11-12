@@ -58,7 +58,7 @@ function Header(props) {
               </div>
             </li>
             <li className="headerItem">
-              <Link to="react_shop/favorites">
+              <Link to="/favorites">
                 <svg
                   width="18"
                   height="17"
@@ -76,7 +76,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="headerItem">
-              <Link to="/react_shop/orders">
+              <Link to="/orders">
                 <a href="#">
                   <svg
                     width="18"
