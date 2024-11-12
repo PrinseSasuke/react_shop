@@ -9,31 +9,26 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const router = createBrowserRouter(
-  [
-    {
-      path: "/react_shop",
-      element: <App />,
-      children: [
-        {
-          path: "/react_shop",
-          element: <Home />,
-        },
-        {
-          path: "/react_shop/favorites",
-          element: <Favorites />,
-        },
-        {
-          path: "/react_shop/orders",
-          element: <Orders />,
-        },
-      ],
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: "/react_shop", // Устанавливаем базовый путь для GitHub Pages
-  }
-);
+    path: "/react_shop",
+    element: <App />,
+    children: [
+      {
+        path: "/react_shop",
+        element: <Home />,
+      },
+      {
+        path: "/react_shop/favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/react_shop/orders",
+        element: <Orders />,
+      },
+    ],
+  },
+]);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
