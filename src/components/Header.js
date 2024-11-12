@@ -14,7 +14,7 @@ function Header(props) {
       <div className="container">
         <Link className="headerLeft" to="/">
           <div href="#">
-            <img src="/img/logo.svg" />
+            <img src="img/logo.svg" />
           </div>
           <div className="headerTitle">
             <div className="headerTitleName">REACT SNEAKERS</div>
