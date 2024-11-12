@@ -100,7 +100,7 @@ function Card({
                 onClick={onClickPlus}
                 style={{ backgroundColor: added ? "#89F09C" : "" }}
               >
-                <img src={added ? "/img/added.svg" : "/img/plus.svg"} alt="" />
+                <img src={added ? "img/added.svg" : "img/plus.svg"} alt="" />
               </button>
             )}
           </div>
